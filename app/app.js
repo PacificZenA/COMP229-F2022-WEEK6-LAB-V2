@@ -42,7 +42,7 @@ import authRouter from './routes/auth.route.server.js';
 // Import Api Routes
 
 import authApiRouter from './routes/api/auth-api.route.server.js';
-//import moviesApiRouter from './routes/api/movies-api.route.server.js';
+import moviesApiRouter from './routes/api/movies-api.route.server.js';
 
 // Instantiate Express Application
 const app = express();
@@ -65,7 +65,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false}));
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname,'/client')));
+app.use(express.static(path.join(__dirname,'/client')));
 app.use(express.static(path.join(__dirname,'../public')));
 
 app.use(cors());
@@ -116,6 +116,6 @@ app.use('/', authRouter);
 
 // Use API Routes
 app.use('/api/auth', authApiRouter);
-//app.use('/api/movies', passport.authenticate('jwt', {session: false}), moviesApiRouter);
+app.use('/api/movies', passport.authenticate('jwt', {session: false}), moviesApiRouter);
 
 export default app;
